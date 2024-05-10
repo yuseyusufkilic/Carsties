@@ -16,9 +16,9 @@ namespace Carsties.AuctionAPI.Controllers
             _auctionService = auctionService;
         }
         [HttpGet]
-        public async Task<ActionResult<List<AuctionDto>>> GetAllAuctions()
+        public async Task<ActionResult<List<AuctionDto>>> GetAllAuctions(string date)
         {
-            return await _auctionService.GetAllAuctions();
+            return await _auctionService.GetAllAuctions(date);
         }
         [HttpGet("{id}")]
         public async Task<ActionResult<AuctionDto>> GetAuctionById(Guid id)

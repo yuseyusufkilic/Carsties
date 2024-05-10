@@ -30,10 +30,11 @@ namespace Carsties.AuctionAPI.Services
             return _auctionRepo.Delete(id);
         }
 
-        public async Task<List<AuctionDto>> GetAllAuctions()
+        public async Task<List<AuctionDto>> GetAllAuctions(string date)
         {
             var auctions = await _auctionRepo.GetAll();
-            return _mapper.Map<List<AuctionDto>>(auctions);
+            var auctionsUpdated=auctions.Where(x => x.UpdatedAt.CompareTo(DateTime.Parse(date).ToUniversalTime()) > 0);
+            return _mapper.Map<List<AuctionDto>>(auctionsUpdated);
         }
 
         public async Task<AuctionDto> GetAuctionById(Guid id)
