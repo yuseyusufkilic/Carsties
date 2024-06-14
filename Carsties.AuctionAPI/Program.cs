@@ -2,8 +2,8 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Carsties.AuctionAPI.Data;
 using Carsties.AuctionAPI.Helpers;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
@@ -18,7 +18,10 @@ builder.Services.AddDbContext<AuctionDbContext>(opt =>
     opt.UseNpgsql(builder.Configuration.GetConnectionString("NpgsqlConnectionString"));
 });
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); //assembly içerisinde profile'dan miras alan bi class var mý bakýyor.
-
+builder.Services.AddMassTransit(x => x.UsingRabbitMq((ctx, cfg) =>
+{
+    cfg.ConfigureEndpoints(ctx);
+}));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

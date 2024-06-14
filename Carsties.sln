@@ -5,7 +5,9 @@ VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Carsties.AuctionAPI", "Carsties.AuctionAPI\Carsties.AuctionAPI.csproj", "{B50367E6-6457-4A95-A425-060832EFE3EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carsties.SearchService", "Carsties.SearchService\Carsties.SearchService.csproj", "{F3D9D939-DAB4-4D21-99A2-DEB92BC305A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Carsties.SearchService", "Carsties.SearchService\Carsties.SearchService.csproj", "{F3D9D939-DAB4-4D21-99A2-DEB92BC305A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{24E4BFFF-BD2C-4B1F-94DC-176BFE70899F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{F3D9D939-DAB4-4D21-99A2-DEB92BC305A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3D9D939-DAB4-4D21-99A2-DEB92BC305A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3D9D939-DAB4-4D21-99A2-DEB92BC305A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24E4BFFF-BD2C-4B1F-94DC-176BFE70899F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24E4BFFF-BD2C-4B1F-94DC-176BFE70899F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24E4BFFF-BD2C-4B1F-94DC-176BFE70899F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24E4BFFF-BD2C-4B1F-94DC-176BFE70899F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
