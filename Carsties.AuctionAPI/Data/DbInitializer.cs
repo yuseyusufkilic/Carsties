@@ -173,28 +173,7 @@ namespace Carsties.AuctionAPI.Data
                 Status = Status.Live,
                 ReservePrice = 20000,
                 Seller = "tom",
-   
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-     tionEnd = DateTime.UtcNow.AddDays(20),
+                AuctionEnd = DateTime.UtcNow.AddDays(20),
                 Item = new Item
                 {
                     Make = "Audi",

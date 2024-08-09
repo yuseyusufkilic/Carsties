@@ -16,8 +16,9 @@ namespace Carsties.AuctionAPI.Services
             
         public async Task<int> Create(Auction auction)
         {
-            _dbContext.Auctions.Add(auction);
-            return await _dbContext.SaveChangesAsync();
+            var entity = await _dbContext.Auctions.AddAsync(auction);
+            var isStateAdded=entity.State == EntityState.Added;
+            return isStateAdded ? 1 : 0;
         }
 
         public async Task<int> Delete(Guid id)
@@ -48,6 +49,11 @@ namespace Carsties.AuctionAPI.Services
             if (auction is null)
                 Console.WriteLine("Auction cannot found."); //TODO: log eklenecek.
             return auction;                     
+        }
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await _dbContext.SaveChangesAsync();
         }
 
         public async Task<int> Update(Guid id, Auction updateAuction)

@@ -18,10 +18,20 @@ builder.Services.AddDbContext<AuctionDbContext>(opt =>
     opt.UseNpgsql(builder.Configuration.GetConnectionString("NpgsqlConnectionString"));
 });
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); //assembly içerisinde profile'dan miras alan bi class var mý bakýyor.
-builder.Services.AddMassTransit(x => x.UsingRabbitMq((ctx, cfg) =>
+builder.Services.AddMassTransit(x =>
 {
-    cfg.ConfigureEndpoints(ctx);
-}));
+    x.AddEntityFrameworkOutbox<AuctionDbContext>(opt =>
+    {
+        opt.QueryDelay = TimeSpan.FromSeconds(10); // outboxta gönderilmemiþ mesaj var mý 10 saniyede bir bak dedik.
+        opt.UsePostgres();
+        opt.UseBusOutbox();
+    }); 
+    x.UsingRabbitMq((ctx, cfg) =>
+    {
+        cfg.ConfigureEndpoints(ctx);
+    });
+
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

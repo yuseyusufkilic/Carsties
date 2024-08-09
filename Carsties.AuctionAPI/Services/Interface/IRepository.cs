@@ -1,4 +1,4 @@
-﻿using Carsties.AuctionAPI.Entities;
+﻿
 
 namespace Carsties.AuctionAPI.Services.Interface
 {
@@ -9,5 +9,6 @@ namespace Carsties.AuctionAPI.Services.Interface
         Task<T> GetById(Guid id);
         Task<int> Update(Guid id, T entity);
         Task<int> Delete(Guid id);
+        Task<int> SaveChangesAsync();
     }
 }

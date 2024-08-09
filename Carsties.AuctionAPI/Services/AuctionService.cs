@@ -23,13 +23,14 @@ namespace Carsties.AuctionAPI.Services
         public async Task<AuctionDto> CreateAuction(CreateAuctionDto createAuctionDto)
         {
             var auction = _mapper.Map<Auction>(createAuctionDto);
-            int isAdded = await _auctionRepo.Create(auction);
-            if (isAdded > 0)
-            {
-                var newAuction = _mapper.Map<AuctionDto>(auction);
-                await _publish.Publish(_mapper.Map<AuctionCreated>(newAuction));
-                return newAuction;
-            }
+            var newAuction = _mapper.Map<AuctionDto>(auction);
+            await _auctionRepo.Create(auction);
+
+            await _publish.Publish(_mapper.Map<AuctionCreated>(newAuction)); //publish satırını save changesten önceye aldık cunku artık outbox pattern var. fail olmasını sallamıyoruz. transaction yapısı var.
+            int isAdded = await _auctionRepo.SaveChangesAsync();
+            Console.WriteLine($"Entity state is {isAdded} ||| 1: added , 0: not added");
+            if (isAdded > 0) return newAuction;
+
             return null;
         }
 
