@@ -158,7 +158,7 @@ namespace Carsties.AuctionAPI.Data
                 AuctionEnd = DateTime.UtcNow.AddDays(19),
                 Item = new Item
                 {
-                    Make = "Audi",
+                  Make = "Audi",
                     Model = "R8",
                     Color = "White",
                     Mileage = 10050,
@@ -173,7 +173,28 @@ namespace Carsties.AuctionAPI.Data
                 Status = Status.Live,
                 ReservePrice = 20000,
                 Seller = "tom",
-                AuctionEnd = DateTime.UtcNow.AddDays(20),
+   
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+     tionEnd = DateTime.UtcNow.AddDays(20),
                 Item = new Item
                 {
                     Make = "Audi",
@@ -209,3 +230,4 @@ namespace Carsties.AuctionAPI.Data
         }
     }
 }
+///

@@ -2,6 +2,8 @@
 using Carsties.AuctionAPI.DTOs;
 using Carsties.AuctionAPI.Entities;
 using Carsties.AuctionAPI.Services.Interface;
+using Contracts;
+using MassTransit;
 
 namespace Carsties.AuctionAPI.Services
 {
@@ -9,11 +11,13 @@ namespace Carsties.AuctionAPI.Services
     {
         private readonly IAuctionRepository _auctionRepo;
         private readonly IMapper _mapper;
+        private readonly IPublishEndpoint _publish;
 
-        public AuctionService(IAuctionRepository auctionRepo, IMapper mapper)
+        public AuctionService(IAuctionRepository auctionRepo, IMapper mapper,IPublishEndpoint publish)
         {
             _auctionRepo = auctionRepo;
             _mapper = mapper;
+            _publish = publish;
         }
 
         public async Task<AuctionDto> CreateAuction(CreateAuctionDto createAuctionDto)
@@ -21,7 +25,11 @@ namespace Carsties.AuctionAPI.Services
             var auction = _mapper.Map<Auction>(createAuctionDto);
             int isAdded = await _auctionRepo.Create(auction);
             if (isAdded > 0)
-                return _mapper.Map<AuctionDto>(auction);
+            {
+                var newAuction = _mapper.Map<AuctionDto>(auction);
+                await _publish.Publish(_mapper.Map<AuctionCreated>(newAuction));
+                return newAuction;
+            }
             return null;
         }
 

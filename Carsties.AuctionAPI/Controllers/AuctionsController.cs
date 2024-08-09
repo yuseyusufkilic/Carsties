@@ -1,5 +1,6 @@
 ﻿using Carsties.AuctionAPI.DTOs;
 using Carsties.AuctionAPI.Services.Interface;
+using MassTransit;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +17,7 @@ namespace Carsties.AuctionAPI.Controllers
             _auctionService = auctionService;
         }
         [HttpGet]
-        public async Task<ActionResult<List<AuctionDto>>> GetAllAuctions(string date)
+        public async Task<ActionResult<List<AuctionDto>>> GetAllAuctions([FromQuery]string date)
         {
             return await _auctionService.GetAllAuctions(date);
         }
@@ -33,7 +34,7 @@ namespace Carsties.AuctionAPI.Controllers
         {
             var createResponse=await _auctionService.CreateAuction(createAuctionDto);
             if (createResponse is not null)
-            {
+            {               
                 return CreatedAtAction(nameof(GetAuctionById), new {createResponse.Id },createResponse);
 
             }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Carsties.AuctionAPI.DTOs;
 using Carsties.AuctionAPI.Entities;
+using Contracts;
 
 namespace Carsties.AuctionAPI.Helpers
 {
@@ -18,6 +19,8 @@ namespace Carsties.AuctionAPI.Helpers
             
             CreateMap<UpdateAuctionDto,Auction>().ForMember(s => s.Item, w => w.MapFrom(ş => ş));
             CreateMap<UpdateAuctionDto, Item>();
+
+            CreateMap<AuctionDto, AuctionCreated>();
 
         }
     }
